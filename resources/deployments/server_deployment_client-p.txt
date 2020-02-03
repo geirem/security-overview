@@ -1,0 +1,10 @@
+[DEFAULT]
+repo.release=https://repo1.maven.org/maven2/
+stage.url.prefix=p
+category=client
+
+[my-strutsful-api]
+resource.maven.war.groupId=struts
+resource.maven.war.artifactId=struts
+resource.maven.war.version=1.2.2
+resource.maven.war.type=jar

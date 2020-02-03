@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 /.idea/
 /security-overview.iml
+/resources/dependency-check/
+/work/
