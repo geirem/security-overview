@@ -8,7 +8,7 @@ from urllib3 import PoolManager
 
 FILES_PATH = '../resources/deployments/'
 FILES = [
-    'server_deployment_client-p.txt',
+    'server_deployment_stage-p.txt',
 ]
 
 
