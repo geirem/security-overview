@@ -11,6 +11,7 @@ FILES = [
     'server_deployment_client-p.txt',
 ]
 
+
 # g = git.cmd.Git(git_dir)
 # g.pull()
 
@@ -32,15 +33,17 @@ def parse_artifact_config(section):
     }
 
 
-#https://repo1.maven.org/maven2/struts/struts/1.2.2/struts-1.2.2.jar
+# https://repo1.maven.org/maven2/struts/struts/1.2.2/struts-1.2.2.jar
 
 
 def handle_artifact(pool_manager: PoolManager, config: dict) -> None:
     artifact_fetcher = FetchArtifact(pool_manager, config)
     artifact_fetcher.fetch()
-    # result = subprocess.run(['../resources/dependency-check/bin/dependency-check.bat', fq_file_name],
-    #                         capture_output=True)
-    # print(result.stdout)
+    result = subprocess.run(
+        ['..\\resources\\dependency-check\\bin\\dependency-check.bat', '-s', '..\\work\\*.jar'],
+        capture_output=False#, cwd='..'
+    )
+    print(result.stdout)
 
 
 def main():
