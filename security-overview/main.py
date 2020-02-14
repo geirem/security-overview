@@ -1,14 +1,14 @@
 import configparser
+import pprint
 import subprocess
-from xml.dom.minidom import Node
-from xml.etree.ElementTree import parse
 
+from lib.PomParser import PomParser
 from lib.FetchArtifact import FetchArtifact
-
 from urllib3 import PoolManager
 
-
-find_dependencies()
+pom = '..\\..\\keycloak-sm-broker\\providers\\pom.xml'
+pp = PomParser()
+pprint.pprint(pp.dependencies(pom))
 exit(0)
 
 FILES_PATH = '../resources/deployments/'
