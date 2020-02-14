@@ -1,10 +1,15 @@
 import configparser
 import subprocess
+from xml.dom.minidom import Node
+from xml.etree.ElementTree import parse
+
 from lib.FetchArtifact import FetchArtifact
 
-# import git
-# HOST = 'git.stb.intra'
 from urllib3 import PoolManager
+
+
+find_dependencies()
+exit(0)
 
 FILES_PATH = '../resources/deployments/'
 FILES = [
