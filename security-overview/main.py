@@ -1,14 +1,41 @@
 import configparser
-import pprint
+import json
+import os
 import subprocess
 
+import requests
 from lib.PomParser import PomParser
 from lib.FetchArtifact import FetchArtifact
 from urllib3 import PoolManager
 
-pom = '..\\..\\keycloak-sm-broker\\providers\\pom.xml'
-pp = PomParser()
-pprint.pprint(pp.dependencies(pom))
+API_KEY = os.environ['TRACK_API_KEY']
+API_BASE_PATH = 'http://localhost:8080/api/v1'
+
+headers = {
+    'x-api-key': API_KEY,
+    'content-type': 'application/json',
+}
+
+data = {
+    'name': 'sdc-broker-rest-api',
+    'version': '1.0.0',
+    'description': 'SDC Broking',
+    'tags': [
+        {'name': 'happy'}
+    ],
+    'active': True,
+}
+
+r = requests.put(API_BASE_PATH + '/project', headers=headers, data=json.dumps(data))
+print(r.status_code if r.status_code != 200 else r.text)
+r = requests.get(API_BASE_PATH + '/project', headers=headers)
+print(r.status_code if r.status_code != 200 else r.text)
+exit(0)
+pom = '../resources/pom.xml'
+pp = PomParser(pom)
+pp.gather()
+for p in pp.get_dependencies():
+    print(p)
 exit(0)
 
 FILES_PATH = '../resources/deployments/'
@@ -46,7 +73,7 @@ def handle_artifact(pool_manager: PoolManager, config: dict) -> None:
     artifact_fetcher.fetch()
     result = subprocess.run(
         ['..\\resources\\dependency-check\\bin\\dependency-check.bat', '-s', '..\\work\\*.jar'],
-        capture_output=False#, cwd='..'
+        capture_output=False  # , cwd='..'
     )
     print(result.stdout)
 
